@@ -4,11 +4,27 @@ server:
 spring:
   datasource:
     ssm:
-      driver-class-name: com.mysql.jdbc.Driver
-      password: 1234
-      url: jdbc:mysql://localhost:3306/sakila?serverTimezone=GMT%2B8
-      username: root
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      password: Nonostone@0105
+      url: jdbc:mysql://rm-f8z46m2vh81sj6532yo.mysql.rds.aliyuncs.com:3306/hera_dev?useSSL=false&serverTimezone=UTC
+      username: hera
 
 logging:
   config: classpath:log4j2.xml
+
+mqtt-push:
+  # clientId的前缀
+  clientId: mqtt_client_
+  # 通过通配符 "+", 订阅主题, 就可以接收所有传感器发送的温度数据了
+  # 多个的话通过,号分割
+  defaultTopic: sensor/+/temperature
+  # clientId的前缀
+  serverClientId: mqtt_server_
+  # 这边替换为自己的ip(或者域名)
+  # 多个的话通过,号分割
+  servers: tcp://10.110.224.142:1883
+  # 访问rabbitmq的用户名
+  username: guest
+  # 访问rabbitmq的密码
+  password: guest
 
